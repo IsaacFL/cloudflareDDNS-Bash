@@ -18,9 +18,9 @@ _PowerShell Script for Windows can be found [here](https://github.com/fire1ce/cl
 ## Installation
 
 ```bash
-wget https://raw.githubusercontent.com/fire1ce/cloudflareDDNS-Bash/main/updateDNS.sh
-sudo chmod +x updateDNS.sh
-sudo mv updateDNS.sh /usr/local/bin/updateDNS
+wget https://raw.githubusercontent.com/IsaacFL/cloudflareDDNS-Bash/main/updateDNS6.sh
+sudo chmod +x updateDNS6.sh
+sudo mv updateDNS6.sh /usr/local/bin/updateDNS6
 ```
 
 ## Parameters
@@ -28,14 +28,14 @@ sudo mv updateDNS.sh /usr/local/bin/updateDNS
 Update the config parameters at
 
 ```bash
-/usr/local/bin/updateDNS
+/usr/local/bin/updateDNS6
 ```
 
 | __Option__           | __Example__      | __Description__                                           |
 | -------------------- | ---------------- | --------------------------------------------------------- |
 | what_ip              | internal         | Which IP should be used for the record: internal/external |
 | what_interface       | eth0             | For internal IP, provide interface name                   |
-| dns_record           | ddns.example.com | DNS __A__ record which will be updated                    |
+| dns_record           | ddns.example.com | DNS __AAAA__ record which will be updated                    |
 | zoneid               | ChangeMe         | Cloudflare's Zone ID                                      |
 | proxied              | false            | Use Cloudflare proxy on dns record true/false             |
 | ttl                  | 120              | 120-7200 in seconds or 1 for Auto                         |
@@ -44,7 +44,7 @@ Update the config parameters at
 ## Running The Script
 
 ```bash
-updateDNS
+updateDNS6
 ```
 
 ## Automation With Crontab
@@ -60,25 +60,25 @@ Here are some Examples
 Run every minute
 
 ```bash
-* * * * * /usr/local/bin/updateDNS
+* * * * * /usr/local/bin/updateDNS6
 ```
 
 Run at boot
 
 ```bash
-@reboot /usr/local/bin/updateDNS
+@reboot /usr/local/bin/updateDNS6
 ```
 
 Run 1 minute fater boot
 
 ```bash
-@reboot sleep 60 && /usr/local/bin/updateDNS
+@reboot sleep 60 && /usr/local/bin/updateDNS6
 ```
 
 Run at 08:00
 
 ```bash
-0 8 * * * /usr/local/bin/updateDNS
+0 8 * * * /usr/local/bin/updateDNS6
 ```
 
 
@@ -94,7 +94,7 @@ Disable cron emails:
 $ sudo crontab -e
 
 ```bash
-* * * * * /usr/local/bin/updateDNS >/dev/null 2>&1
+* * * * * /usr/local/bin/updateDNS6 >/dev/null 2>&1
 ```
 
 

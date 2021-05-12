@@ -32,9 +32,9 @@ if [ "${what_ip}" == "external" ]; then
 else
     if [ "${what_ip}" == "internal" ]; then
         if which ip >/dev/null; then
-            ip=$(ip -o -4 addr show ${what_interface} scope global | awk '{print $4;}' | cut -d/ -f 1)
+            ip=$(ip -o -6 addr show ${what_interface} scope global | awk '{print $4;}' | cut -d/ -f 1)
         else
-            ip=$(ifconfig ${what_interface} | grep 'inet ' | awk '{print $2}')
+            ip=$(ifconfig ${what_interface} | grep 'inet6 ' | awk '{print $2}')
         fi
     else
         echo "missing or incorrect what_ip/what_interface parameter"
