@@ -65,6 +65,11 @@ Run every minute
 ```bash
 * * * * * /usr/local/bin/updateDNS6
 ```
+Run every 5 minutes
+
+```bash
+*/5 * * * * /usr/local/bin/updateDNS6
+```
 
 Run at boot
 
@@ -72,7 +77,7 @@ Run at boot
 @reboot /usr/local/bin/updateDNS6
 ```
 
-Run 1 minute fater boot
+Run 1 minute after boot
 
 ```bash
 @reboot sleep 60 && /usr/local/bin/updateDNS6
