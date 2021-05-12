@@ -13,18 +13,6 @@ proxied="false"                 ##### Use Cloudflare proxy on dns record true/fa
 ttl=120                         ##### 120-7200 in seconds or 1 for Auto
 cloudflare_api_token="ChangeMe" ##### Cloudflare API Token keep it private!!!!
 
-
-##### .updateDNS.log file of the last run for debug
-parent_path="$(dirname "${BASH_SOURCE[0]}")"
-FILE=${parent_path}/.updateDNS.log
-if ! [ -x "$FILE" ]; then
-    touch "$FILE"
-fi
-
-LOG_FILE=${parent_path}'/.updateDNS.log' #log file name
-exec > >(tee $LOG_FILE) 2>&1             # Writes STDOUT & STDERR as log file and prints to screen
-echo "==> $(date "+%Y-%m-%d %H:%M:%S")"
-
 ##### Get the current IP addresss
 if [ "${what_ip}" == "external" ]; then
     ip=$(curl -s -X GET https://checkip.amazonaws.com)
@@ -40,7 +28,7 @@ else
     fi
 fi
 
-echo "==> Current IP is $ip"
+logger -s -t $(basename $0) -p user.info "==> Current IP is $ip"
 
 ##### get the dns record id and current ip from cloudflare's api
 dns_record_info=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records?type=AAAA&name=$dns_record" \
@@ -51,10 +39,10 @@ dns_record_id=$(echo ${dns_record_info} | grep -o '"id":"[^"]*' | cut -d'"' -f4)
 dns_record_ip=$(echo ${dns_record_info} | grep -o '"content":"[^"]*' | cut -d'"' -f4)
 
 if [ ${dns_record_ip} == ${ip} ]; then
-    echo "==> No changes needed! DNS Record currently is set to $dns_record_ip"
+    logger -s -t $(basename $0) -p user.info "==> No changes needed! DNS Record currently is set to $dns_record_ip"
     exit
 else
-    echo "==> DNS Record currently is set to $dns_record_ip". Updating!!!
+    logger -s -t $(basename $0) -p user.info "==> DNS Record currently is set to $dns_record_ip". Updating!!!
 fi
 
 ##### updates the dns record
@@ -64,11 +52,8 @@ update=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_
     --data "{\"type\":\"AAAA\",\"name\":\"$dns_record\",\"content\":\"$ip\",\"ttl\":$ttl,\"proxied\":$proxied}")
 
 if [[ $update == *"\"success\":false"* ]]; then
-    echo -e "==> FAILED:\n$update"
-	logger "==> FAILED:\n$update"
+    logger -s -t $(basename $0) -p user.warn "==> FAILED:\n$update"
     exit 1
 else
-    echo "==> $dns_record DNS Record Updated To: $ip"
-	logger "==> $dns_record DNS Record Updated To: $ip"
+    logger -s -t $(basename $0) -p user.info "==> $dns_record DNS Record Updated To: $ip"
 fi
-
