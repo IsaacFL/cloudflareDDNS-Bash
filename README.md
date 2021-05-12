@@ -31,7 +31,7 @@ sudo mv .updateDNS.log /usr/local/bin/.updateDNS.log
 Update the config parameters at
 
 ```bash
-/usr/local/bin/updateDNS6
+sudo nano /usr/local/bin/updateDNS6
 ```
 
 | __Option__           | __Example__      | __Description__                                           |
