@@ -65,9 +65,10 @@ update=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_
 
 if [[ $update == *"\"success\":false"* ]]; then
     echo -e "==> FAILED:\n$update"
-		logger "updateDNS6 ==> FAILED:\n$update"
+	logger "==> FAILED:\n$update"
     exit 1
 else
     echo "==> $dns_record DNS Record Updated To: $ip"
-	logger "updateDNS6 $dns_record DNS Record Updated To: $ip"
+	logger "==> $dns_record DNS Record Updated To: $ip"
 fi
+

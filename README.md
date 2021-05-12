@@ -21,6 +21,9 @@ _PowerShell Script for Windows can be found [here](https://github.com/IsaacFL/cl
 wget https://raw.githubusercontent.com/IsaacFL/cloudflareDDNS-Bash/main/updateDNS6.sh
 sudo chmod +x updateDNS6.sh
 sudo mv updateDNS6.sh /usr/local/bin/updateDNS6
+touch .updateDNS.log
+sudo mv .updateDNS.log /usr/local/bin/.updateDNS.log
+
 ```
 
 ## Parameters
