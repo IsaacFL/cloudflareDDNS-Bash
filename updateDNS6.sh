@@ -5,7 +5,7 @@ export PATH=/sbin:/opt/bin:/usr/local/bin:/usr/contrib/bin:/bin:/usr/bin:/usr/sb
 ## DNS record MUST pre-creating on Cloudflare
 
 ##### Config Params
-what_ip="internal"              ##### Which IP should be used for the record: internal only for ipv6
+what_ip="internal"              ##### Which IP should be used for the record: usually internal for ipv6
 what_interface="eth0"           ##### For internal IP, provide interface name
 dns_record="ddns.example.com"   ##### DNS A record which will be updated
 zoneid="ChangeMe"               ##### Cloudflare's Zone ID
@@ -15,7 +15,7 @@ cloudflare_api_token="ChangeMe" ##### Cloudflare API Token keep it private!!!!
 
 ##### Get the current IP addresss
 if [ "${what_ip}" == "external" ]; then
-    ip=$(curl -s -X GET https://checkip.amazonaws.com)
+    ip=$(curl -s -6 -X GET https://icanhazip.com)
 else
     if [ "${what_ip}" == "internal" ]; then
         if which ip >/dev/null; then
