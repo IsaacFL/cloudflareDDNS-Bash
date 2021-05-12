@@ -51,7 +51,7 @@ dns_record_id=$(echo ${dns_record_info} | grep -o '"id":"[^"]*' | cut -d'"' -f4)
 dns_record_ip=$(echo ${dns_record_info} | grep -o '"content":"[^"]*' | cut -d'"' -f4)
 
 if [ ${dns_record_ip} == ${ip} ]; then
-    echo "==> No changes needed! DNS Recored currently is set to $dns_record_ip"
+    echo "==> No changes needed! DNS Record currently is set to $dns_record_ip"
     exit
 else
     echo "==> DNS Record currently is set to $dns_record_ip". Updating!!!
