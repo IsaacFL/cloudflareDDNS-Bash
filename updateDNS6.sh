@@ -10,7 +10,7 @@ what_interface="eth0"           ##### For internal IP, provide interface name
 dns_record="ddns.example.com"   ##### DNS A record which will be updated
 zoneid="ChangeMe"               ##### Cloudflare's Zone ID
 proxied="false"                 ##### Use Cloudflare proxy on dns record true/false
-ttl=120                         ##### 120-7200 in seconds or 1 for Auto
+ttl=1                           ##### 120-7200 in seconds or 1 for Auto
 cloudflare_api_token="ChangeMe" ##### Cloudflare API Token keep it private!!!!
 
 ##### Get the current IP addresss
