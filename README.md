@@ -88,31 +88,6 @@ Run at 08:00
 ```
 
 
-## Running the script frequently with cron, and only get an email when DNS is updated
-*This requires the package mailutils to be installed and a root user email configured.
-
-Once mailutils is installed and configured:
-
-set updateDNS script variable: update_me="yes"
-set updateDNS script variable: update_email="your@email.xyz" (this is the email you want to be notified of the DNS changes)
-
-Disable cron emails:
-$ sudo crontab -e
-
-```bash
-* * * * * /usr/local/bin/updateDNS6 >/dev/null 2>&1
-```
-
-
-## Logs
-
-This Script will create a log file with __only__ the last run information
-Log file will be located at
-
-```bash
-/usr/local/bin/.updateDNS.log
-```
-
 ## License
 
 ### MIT License
