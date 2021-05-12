@@ -12,8 +12,7 @@ zoneid="ChangeMe"               ##### Cloudflare's Zone ID
 proxied="false"                 ##### Use Cloudflare proxy on dns record true/false
 ttl=120                         ##### 120-7200 in seconds or 1 for Auto
 cloudflare_api_token="ChangeMe" ##### Cloudflare API Token keep it private!!!!
-notify_me="no"                  ##### yes/no (yes requires mailutils package installed/configured)
-notify_email="email address"    ##### enter your email address (email is only sent if DNS is updated)
+
 
 ##### .updateDNS.log file of the last run for debug
 parent_path="$(dirname "${BASH_SOURCE[0]}")"
@@ -69,7 +68,5 @@ if [[ $update == *"\"success\":false"* ]]; then
     exit 1
 else
     echo "==> $dns_record DNS Record Updated To: $ip"
-    if [ $notify_me !=no ]; then
-        mail -s "ip address changed & DNS updated" $notify_email < /usr/local/bin/.updateDNS.log
-    fi
+	logger "==> $dns_record DNS Record Updated To: $ip"
 fi
