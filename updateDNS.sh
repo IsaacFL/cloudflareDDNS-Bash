@@ -64,12 +64,13 @@ update=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_
     -H "Content-Type: application/json" \
     --data "{\"type\":\"A\",\"name\":\"$dns_record\",\"content\":\"$ip\",\"ttl\":$ttl,\"proxied\":$proxied}")
 
-if [[ $update == *"\"success\":false"* ]]; then
+if [[ ${update} == *"\"success\":false"* ]]; then
     echo -e "==> FAILED:\n$update"
     exit 1
 else
     echo "==> $dns_record DNS Record Updated To: $ip"
-    if [ $notify_me !=no ]; then
-        mail -s "ip address changed & DNS updated" $notify_email < /usr/local/bin/.updateDNS.log
+    if [ ${notify_me} != "no" ]; then
+        mail -s "ip address changed & DNS updated" ${notify_email} </usr/local/bin/.updateDNS.log
+        echo "diffrent then no"
     fi
 fi
