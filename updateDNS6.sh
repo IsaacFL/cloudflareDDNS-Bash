@@ -28,7 +28,7 @@ else
     fi
 fi
 
-logger -s -t $(basename $0) -p user.info "==> Current IP is $ip"
+logger -s -t $(basename $0) -p user.info "==> Current Local IP is $ip"
 
 ##### get the dns record id and current ip from cloudflare's api
 dns_record_info=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records?type=AAAA&name=$dns_record" \
@@ -38,11 +38,13 @@ dns_record_info=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$zo
 dns_record_id=$(echo ${dns_record_info} | grep -o '"id":"[^"]*' | cut -d'"' -f4)
 dns_record_ip=$(echo ${dns_record_info} | grep -o '"content":"[^"]*' | cut -d'"' -f4)
 
+logger -s -t $(basename $0) -p user.info "==> DNS Record currently is set to $dns_record_ip"
+
 if [ ${dns_record_ip} == ${ip} ]; then
-    logger -s -t $(basename $0) -p user.info "==> No changes needed! DNS Record currently is set to $dns_record_ip"
+    logger -s -t $(basename $0) -p user.info "==> No changes needed!"
     exit
 else
-    logger -s -t $(basename $0) -p user.info "==> DNS Record currently is set to $dns_record_ip". Updating!!!
+    logger -s -t $(basename $0) -p user.info "==> Updating!!!"
 fi
 
 ##### updates the dns record
