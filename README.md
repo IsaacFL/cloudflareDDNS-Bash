@@ -40,7 +40,7 @@ sudo nano /usr/local/bin/updateDNS6
 | zoneid               | ChangeMe         | Cloudflare's Zone ID                                      |
 | proxied              | false            | Use Cloudflare proxy on dns record true/false             |
 | ttl                  | 120              | 120-7200 in seconds or 1 for Auto                         |
-| cloudflare_api_token | ChangeMe         | Cloudflare API Token __KEEP IT PRIVET!!!!__               |
+| cloudflare_api_token | ChangeMe         | Cloudflare API Token __KEEP IT PRIVATE!!!!__               |
 
 ## Running The Script
 
