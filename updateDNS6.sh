@@ -38,7 +38,7 @@ dns_record_info=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$zo
 dns_record_id=$(echo ${dns_record_info} | grep -o '"id":"[^"]*' | cut -d'"' -f4)
 dns_record_ip=$(echo ${dns_record_info} | grep -o '"content":"[^"]*' | cut -d'"' -f4)
 
-logger -s -t $(basename $0) -p user.info "==> DNS Record currently is set to $dns_record_ip"
+logger -s -t $(basename $0) -p user.info "==> DNS Record on Cloudflare is currently set to $dns_record_ip"
 
 if [ ${dns_record_ip} == ${ip} ]; then
     logger -s -t $(basename $0) -p user.info "==> No changes needed!"
